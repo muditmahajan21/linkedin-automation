@@ -1,0 +1,28 @@
+{
+  "name": "LinkedIn Automation",
+  "version": "1.0.0",
+  "description": "LinkedIn Automation Tool",
+  "manifest_version": 3,
+  "author": "Mudit Mahajan",
+  "action":{
+    "default_icon": {
+      "16": "linkedin.png",
+      "32": "linkedin.png",
+      "48": "linkedin.png",
+      "128": "linkedin.png"
+
+    },
+    "default_popup": "index.html",
+    "default_title": "LinkedIn Automation"
+  },
+  "permissions": ["tabs","storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts":[
+    {
+      "matches":["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
