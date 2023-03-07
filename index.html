@@ -7,10 +7,27 @@
     <meta charset="utf-8">
 </head>
 <body class="bg-dark">
-    <div class="container mt-3 text-center" style="width: 200px; height:100px;">
+    <div class="container mt-3 text-center" style="width: 400px; height:1000px;">
         <h6 class="text-white">LinkedIn Automation</h6>
         <br />
+        <p
+            class="text-white"
+            style="font-size: 12px;"
+        >
+            Enter variables enclosed in %% and they will be replaced with the corresponding value.
+        </p>
+        <!-- Add a input text for a message -->
+        <textarea  id="linkedin-automation-message" class="form-control" placeholder="Message">
+        </textarea>
+        <br />
+        <!-- If vairables found in the message, add fields for the user to tnter their values -->
+        <div id="variables-container"></div>
+        <br />
+        <button class="btn btn-primary" id="addVariables">Add Variables</button>
         <button class="btn btn-primary" id="addMessage">Add Message</button>
+        <br />
+        <br />
+        <button class="btn btn-primary" id="save-template">Save Template</button>
     </div>
 </body>
 <script type="module" src="main.js"></script>
