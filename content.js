@@ -28,6 +28,7 @@ chrome.runtime.onMessage.addListener(async (obj, sender, response) => {
     if(obj.message === "addMessage") {  
       const messageButton = document.getElementsByClassName("message-anywhere-button pvs-profile-actions__action artdeco-button")[0];
       if(messageButton) {
+        await messageButton.click();
 
         // Find the Send Button and click it
         const sendButton = document.getElementsByClassName("msg-form__send-button");
