@@ -33,7 +33,24 @@ document.addEventListener("DOMContentLoaded", async (tab) => {
 const addMessageButton = document.getElementById("addMessage");  
 addMessageButton.addEventListener("click", async () => {
   const activeTab = await getActiveTabURL();
-  chrome.tabs.sendMessage(activeTab.id, { message: "addMessage" });                   //send message to content.js
+  // Get the value of the linkedin-automation-message input
+  const messageInput = document.getElementById("linkedin-automation-message");
+  const message = messageInput.value;
+  // Get the variables
+  const variables = document.getElementById("variables-container").children;
+  const variablesObject = {};
+  for (let i = 0; i < variables.length; i++) {
+    const variable = variables[i];
+    const variableName = variable.id;
+    const variableValue = variable.value;
+    variablesObject[variableName] = variableValue;
+  }
+  // Replace variables in message
+  let messageWithVariables = message;
+  for (const variable in variablesObject) {
+    messageWithVariables = messageWithVariables.replace(`%${variable}%`, variablesObject[variable]);
+  }
+  chrome.tabs.sendMessage(activeTab.id, { message: "addMessage", value: messageWithVariables });                   //send message to content.js
 });
 
 const addVariablesButton = document.getElementById("addVariables");
