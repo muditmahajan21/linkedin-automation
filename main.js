@@ -50,6 +50,7 @@ addMessageButton.addEventListener("click", async () => {
   for (const variable in variablesObject) {
     messageWithVariables = messageWithVariables.replace(`%${variable}%`, variablesObject[variable]);
   }
+  window.close();
   chrome.tabs.sendMessage(activeTab.id, { message: "addMessage", value: messageWithVariables });                   //send message to content.js
 });
 
