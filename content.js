@@ -2,7 +2,7 @@
 chrome.runtime.onMessage.addListener(async (obj, sender, response) => {  
   try {
     if(obj.message === "addMessage") {  
-      const messageButton = document.getElementsByClassName("message-anywhere-button pvs-profile-actions__action artdeco-button")[0];
+      const messageButton = document.getElementsByClassName("artdeco-button artdeco-button--2 artdeco-button--primary ember-view pvs-profile-actions__action")[0];
       if(messageButton) {
         await messageButton.click();
         // Wait for the message box to appear
