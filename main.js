@@ -76,12 +76,12 @@ addVariablesButton.addEventListener("click", async () => {
     );
     chrome.tabs.sendMessage(activeTab.id, { message: "getProfileData" }, (response) => {
       const variablesContainer = document.getElementById("variables-container");
-      const variables = variablesContainer.children;
-      for (let i = 0; i < variables.length; i++) {
+      const variables = variablesContainer?.children;
+      for (let i = 0; i < variables?.length; i++) {
         const variable = variables[i];
-        const variableName = variable.id;
-        if (variableName.toLowerCase().includes("name")) {
-          variable.value = response.nameString;
+        const variableName = variable?.id;
+        if (variableName?.toLowerCase()?.includes("name")) {
+          variable.value = response?.nameString ? response?.nameString : "";
         }
       }
     });
