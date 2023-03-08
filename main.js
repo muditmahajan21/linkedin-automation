@@ -148,3 +148,24 @@ saveTemplateButton.addEventListener("click", async () => {
   }
   );
 });
+
+const copyMessage = document.getElementById("copyMessage");
+copyMessage.addEventListener("click", async () => {
+  const messageInput = document.getElementById("linkedin-automation-message");
+  // Get variables and replace them in message
+  const variables = document.getElementById("variables-container").children;
+  const variablesObject = {};
+  for (let i = 0; i < variables.length; i++) {
+    const variable = variables[i];
+    const variableName = variable.id;
+    const variableValue = variable.value;
+    variablesObject[variableName] = variableValue;
+  }
+  // Replace variables in message
+  let messageWithVariables = messageInput.value;
+  for (const variable in variablesObject) {
+    messageWithVariables = messageWithVariables.replace(`%${variable}%`, variablesObject[variable]);  
+  }
+  // Copy the messagewithvariables to clipboard
+  navigator.clipboard.writeText(messageWithVariables);
+});
