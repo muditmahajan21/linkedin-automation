@@ -95,8 +95,10 @@ addMessageButton.addEventListener("click", async () => {
   for (const variable in variablesObject) {
     messageWithVariables = messageWithVariables.replace(`%${variable}%`, variablesObject[variable]);
   }
-  window.close();
-  chrome.tabs.sendMessage(activeTab.id, { message: "addMessage", value: messageWithVariables });                   //send message to content.js
+  if(messageWithVariables !== "") {
+    window.close();
+    chrome.tabs.sendMessage(activeTab.id, { message: "addMessage", value: messageWithVariables });        
+  }           //send message to content.js
 });
 
 const addVariablesButton = document.getElementById("addVariables");
@@ -158,6 +160,9 @@ addVariablesButton.addEventListener("click", async () => {
         }
       }
     });
+  } else {
+    const variablesContainer = document.getElementById("variables-container");
+    variablesContainer.innerHTML = "";
   }
 });
 
