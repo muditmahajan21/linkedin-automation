@@ -4,7 +4,7 @@ chrome.runtime.onMessage.addListener(async (obj, sender, response) => {
     if(obj.message === "addMessage") {  
       let messageButton = document.getElementsByClassName("artdeco-button artdeco-button--2 artdeco-button--primary ember-view pvs-profile-actions__action")[0];
       if(!messageButton) {
-        messageButton = document.getElementsByClassName("message-anywhere-button pvs-profile-actions__action artdeco-button")
+        messageButton = document.getElementsByClassName("message-anywhere-button pvs-profile-actions__action artdeco-button")[1];
       }
       if(messageButton) {
         await messageButton.click();
