@@ -35,7 +35,7 @@ chrome.runtime.onMessage.addListener(async (obj, sender, response) => {
         const lastName = nameArray[nameArray.length - 1];
         const nameString = firstName + " " + lastName;
         // Send the first name and last name to the popup
-        response({ nameString });
+        response({ firstName, lastName, nameString });
       }
     }
   } catch(error) {

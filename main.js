@@ -1,5 +1,27 @@
 import { getActiveTabURL } from "./utils.js"                                          //utols file to get current url
 
+const prefillFirstNames = [
+  "firstname",
+  "first_name",
+  "first-name",
+  "first name",
+]
+
+const prefillLastNames = [
+  "lastname",
+  "last_name",
+  "last-name",
+  "last name",
+]
+
+const fullNames = [
+  "name",
+  "fullname",
+  "full_name",
+  "full-name",
+  "full name",
+]
+
 document.addEventListener("DOMContentLoaded", async (tab) => {
   const activeTab = await getActiveTabURL();
   if (!activeTab.url.includes("www.linkedin.com/in/")) {                                 //check if url is linkedin search
@@ -80,7 +102,19 @@ addVariablesButton.addEventListener("click", async () => {
       for (let i = 0; i < variables?.length; i++) {
         const variable = variables[i];
         const variableName = variable?.id;
-        if (variableName?.toLowerCase()?.includes("name")) {
+        // if (variableName?.toLowerCase()?.includes("name")) {
+        //   variable.value = response?.nameString ? response?.nameString : "";
+        // }
+        // If variable is in first names array
+        if (prefillFirstNames.includes(variableName?.toLowerCase())) {
+          variable.value = response?.firstName ? response?.firstName : "";
+        }
+        // If variable is in last names array
+        if (prefillLastNames.includes(variableName?.toLowerCase())) {
+          variable.value = response?.lastName ? response?.lastName : "";
+        }
+        // If variable is in full names array
+        if (fullNames.includes(variableName?.toLowerCase())) {
           variable.value = response?.nameString ? response?.nameString : "";
         }
       }
