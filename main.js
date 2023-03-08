@@ -101,6 +101,17 @@ addVariablesButton.addEventListener("click", async () => {
   // Get the value of the linkedin-automation-message input
   const messageInput = document.getElementById("linkedin-automation-message");
   const message = messageInput.value;
+
+  // Get existing variables
+  const existingVariables = document.getElementById("variables-container").children;
+  const existingVariablesObject = {};
+  for (let i = 0; i < existingVariables.length; i++) {
+    const variable = existingVariables[i];
+    const variableName = variable.id;
+    const variableValue = variable.value;
+    existingVariablesObject[variableName] = variableValue;
+  }
+  
   // Variables are enclosed in % and %
   const variables = message.match(/%.*?%/g);
   if (variables) {
@@ -116,6 +127,13 @@ addVariablesButton.addEventListener("click", async () => {
       variablesContainer.appendChild(variableInput);
     }
     );
+    // Prefill variables with existing values
+    for (const variable in existingVariablesObject) {
+      const variableInput = document.getElementById(variable);
+      if(variableInput) {
+        variableInput.value = existingVariablesObject[variable];
+      } 
+    }
     chrome.tabs.sendMessage(activeTab.id, { message: "getProfileData" }, (response) => {
       const variablesContainer = document.getElementById("variables-container");
       const variables = variablesContainer?.children;
