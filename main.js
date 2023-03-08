@@ -159,7 +159,7 @@ saveTemplateButton.addEventListener("click", async () => {
   // Save template to chrome storage
   chrome.storage.sync.get(['templates'], function (result) {
     let templates = result.templates || [];
-    templates.unshift(template);
+    templates[0] = template;
     chrome.storage.sync.set({ templates: templates }, function () {
       console.log('Value is set to ' + templates);
     });
