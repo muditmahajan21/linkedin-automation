@@ -23,7 +23,18 @@ chrome.runtime.onMessage.addListener(async (obj, sender, response) => {
           console.log("Message box not found");
         }
       }
-    }   
+    } else if(obj.message === "getProfileData") {
+      // Take the first name and last name from the profile
+      const name = document.getElementsByClassName("text-heading-xlarge")[0];
+      if(name) {
+        const nameArray = name.innerText.split(" ");
+        const firstName = nameArray[0];
+        const lastName = nameArray[nameArray.length - 1];
+        const nameString = firstName + " " + lastName;
+        // Send the first name and last name to the popup
+        response({ nameString });
+      }
+    }
   } catch(error) {
     console.log(error);
   }                             //list of all serach results

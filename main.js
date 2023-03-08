@@ -1,5 +1,4 @@
 import { getActiveTabURL } from "./utils.js"                                          //utols file to get current url
-let total = 0;
 
 document.addEventListener("DOMContentLoaded", async (tab) => {
   const activeTab = await getActiveTabURL();
@@ -56,6 +55,7 @@ addMessageButton.addEventListener("click", async () => {
 
 const addVariablesButton = document.getElementById("addVariables");
 addVariablesButton.addEventListener("click", async () => {
+  const activeTab = await getActiveTabURL();
   // Get the value of the linkedin-automation-message input
   const messageInput = document.getElementById("linkedin-automation-message");
   const message = messageInput.value;
@@ -74,6 +74,17 @@ addVariablesButton.addEventListener("click", async () => {
       variablesContainer.appendChild(variableInput);
     }
     );
+    chrome.tabs.sendMessage(activeTab.id, { message: "getProfileData" }, (response) => {
+      const variablesContainer = document.getElementById("variables-container");
+      const variables = variablesContainer.children;
+      for (let i = 0; i < variables.length; i++) {
+        const variable = variables[i];
+        const variableName = variable.id;
+        if (variableName.toLowerCase().includes("name")) {
+          variable.value = response.nameString;
+        }
+      }
+    });
   }
 });
 
