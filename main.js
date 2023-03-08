@@ -58,15 +58,19 @@ document.addEventListener("DOMContentLoaded", async (tab) => {
             variable.value = response?.firstName ? response?.firstName : "";
           }
           // If variable is in last names array
-          if (prefillLastNames.includes(variableName?.toLowerCase())) {
+          else if (prefillLastNames.includes(variableName?.toLowerCase())) {
             variable.value = response?.lastName ? response?.lastName : "";
           }
           // If variable is in full names array
-          if (fullNames.includes(variableName?.toLowerCase())) {
+          else if (fullNames.includes(variableName?.toLowerCase())) {
             variable.value = response?.nameString ? response?.nameString : "";
           }
         }
       });
+      // Create a event for addVariablesButton
+      document.createEvent("Event");
+      const addVariablesButton = document.getElementById("addVariables");
+      addVariablesButton.dispatchEvent(new Event("click"));
     });
   }
 });
