@@ -2,7 +2,23 @@
 chrome.runtime.onMessage.addListener(async (obj, sender, response) => {  
   try {
     if(obj.message === "addMessage") {  
-      let messageButton = document.getElementsByClassName("artdeco-button artdeco-button--2 artdeco-button--primary ember-view pvs-profile-actions__action")[0];
+      const messageButtonElements = document.getElementsByClassName("artdeco-button artdeco-button--2");
+      const nameDiv = document.getElementsByClassName("text-heading-xlarge")[0];
+      let firstName = "";
+      if(nameDiv) {
+        const nameArray = nameDiv.innerText.split(" ");
+        firstName = nameArray[0];
+      }
+      // The message button is the one with "Message" in it's label
+      // Find the message button 
+      let messageButton = null;
+      for (let i = 0; i < messageButtonElements.length; i++) {
+        const element = messageButtonElements[i];
+        if(element?.ariaLabel?.includes("Message " + firstName)) {
+          messageButton = element;
+          break;
+        }       
+      }
       if(!messageButton) {
         messageButton = document.getElementsByClassName("message-anywhere-button pvs-profile-actions__action artdeco-button")[1];
       }
