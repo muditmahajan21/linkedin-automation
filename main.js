@@ -49,7 +49,6 @@ document.addEventListener("DOMContentLoaded", async (tab) => {
   } else {
     chrome.storage.sync.get(['templates'], async (result) => {
       const templates = result.templates || [];
-      // Set the value of the linkedin-automation-message input
       if(templates.length === 0) {
         return;
       }
@@ -69,6 +68,28 @@ document.addEventListener("DOMContentLoaded", async (tab) => {
       await addProfileData("template");
       await addVariablesFeature("template");
     });
+
+    chrome.storage.sync.get(['connections'], async (result) => {
+      const connections = result.connections || [];
+      if(connections.length === 0) {
+        return;
+      }
+      
+      connectionMessage.value = connections[0].message;
+      const variables = connections[0].variables;
+      connectionVariables.innerHTML = "";
+      for (const variable in variables) {
+        const variableInput = document.createElement("input");
+        variableInput.setAttribute("type", "text");
+        variableInput.setAttribute("placeholder", variable);
+        variableInput.setAttribute("id", variable);
+        variableInput.setAttribute("value", variables[variable]);
+        connectionVariables.appendChild(variableInput);
+      }
+      
+      await addProfileData("connection");
+      await addVariablesFeature("connection");
+    })
   }
 });
 
@@ -256,4 +277,20 @@ saveTemplateButton.addEventListener("click", async () => {
 
 copyTemplateButton.addEventListener("click", async () => {
   await copyToClipboardFeature("template");
+});
+
+addConnectionVariablesButton.addEventListener("click", async () => {
+  await addVariablesFeature("connection");
+});
+
+sendConnectionButton.addEventListener("click", async () => {
+  await sendMessageFeature("connection");
+});
+
+saveConnectionTemplateButton.addEventListener("click", async () => {
+  await saveTemplateFeature("connection");
+});
+
+copyConnectionButton.addEventListener("click", async () => {
+  await copyToClipboardFeature("connection");
 });
