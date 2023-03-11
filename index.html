@@ -19,7 +19,7 @@
         <h6
             class="text-white"
         >
-            Template Message
+            Template For Message / InMail
         </h6>
         <textarea  id="linkedin-automation-message" class="form-control" placeholder="Message">
         </textarea>
@@ -33,6 +33,25 @@
         <br />
         <button class="btn btn-primary" id="save-template">Save Template</button>
         <button class="btn btn-primary" id="copyMessage">Copy Message</button>
+        <br />
+        <br />
+        <!-- Template for Connection Request -->
+        <h6
+            class="text-white"
+        >
+            Template For Connection Request
+        </h6>
+        <textarea  id="linkedin-automation-connection" class="form-control" placeholder="Connection Request Message" maxlength="300">
+        </textarea>
+        <br />
+        <div id="connection-variables-container"></div>
+        <br />
+        <button class="btn btn-primary" id="addConnectionVariables">Add Variables</button>
+        <button class="btn btn-primary" id="addConnectionRequest">Send Request</button>
+        <br />
+        <br />
+        <button class="btn btn-primary" id="save-connection-template">Save Template</button>
+        <button class="btn btn-primary" id="copyConnectionRequest">Copy Message</button>
     </div>
 </body>
 <script type="module" src="main.js"></script>
