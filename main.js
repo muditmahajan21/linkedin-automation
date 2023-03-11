@@ -107,15 +107,15 @@ const addProfileData = async (type) => {
       const variableName = variable.id;
       // If variable is in first names array
       if (prefillFirstNames.includes(variableName.toLowerCase())) {
-        variable.value = response.firstName ? response.firstName : "";
+        variable.value = response?.firstName ? response?.firstName : "";
       }
       // If variable is in last names array
       else if (prefillLastNames.includes(variableName.toLowerCase())) {
-        variable.value = response.lastName ? response.lastName : "";
+        variable.value = response?.lastName ? response?.lastName : "";
       }
       // If variable is in full names array
       else if (fullNames.includes(variableName.toLowerCase())) {
-        variable.value = response.nameString ? response.nameString : "";
+        variable.value = response?.nameString ? response?.nameString : "";
       }
     }
   });
